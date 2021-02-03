@@ -1,27 +1,21 @@
 
-// ParkReport.cpp : Defines the class behaviors for the application.
-//
-
 #include "stdafx.h"
 #include "framework.h"
-#include "ParkReport.h"
-#include "ParkReportDlg.h"
+#include "ParkReport_Viewer.h"
+#include "ParkReport_ViewerDlg.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
-
-// CParkReportApp
-
-BEGIN_MESSAGE_MAP(CParkReportApp, CWinApp)
+BEGIN_MESSAGE_MAP(CParkReportViewerApp, CWinApp)
 	ON_COMMAND(ID_HELP, &CWinApp::OnHelp)
 END_MESSAGE_MAP()
 
 
-// CParkReportApp construction
+// CParkReportViewerApp construction
 
-CParkReportApp::CParkReportApp()
+CParkReportViewerApp::CParkReportViewerApp()
 {
 	// support Restart Manager
 	m_dwRestartManagerSupportFlags = AFX_RESTART_MANAGER_SUPPORT_RESTART;
@@ -30,15 +24,9 @@ CParkReportApp::CParkReportApp()
 	// Place all significant initialization in InitInstance
 }
 
+CParkReportViewerApp theApp;
 
-// The one and only CParkReportApp object
-
-CParkReportApp theApp;
-
-
-// CParkReportApp initialization
-
-BOOL CParkReportApp::InitInstance()
+BOOL CParkReportViewerApp::InitInstance()
 {
 	// InitCommonControlsEx() is required on Windows XP if an application
 	// manifest specifies use of ComCtl32.dll version 6 or later to enable
@@ -71,7 +59,7 @@ BOOL CParkReportApp::InitInstance()
 	// such as the name of your company or organization
 	SetRegistryKey(_T("Local AppWizard-Generated Applications"));
 
-	CParkReportDlg dlg;
+	CParkReportViewerDlg dlg;
 	m_pMainWnd = &dlg;
 	INT_PTR nResponse = dlg.DoModal();
 	if (nResponse == IDOK)

@@ -1,11 +1,11 @@
 
-// ParkReportDlg.cpp : implementation file
+// ParkReport_ViewerDlg.cpp : implementation file
 //
 
 #include "stdafx.h"
 #include "framework.h"
-#include "ParkReport.h"
-#include "ParkReportDlg.h"
+#include "ParkReport_Viewer.h"
+#include "ParkReport_ViewerDlg.h"
 #include "afxdialogex.h"
 
 #ifdef _DEBUG
@@ -46,31 +46,31 @@ BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
 END_MESSAGE_MAP()
 
 
-// CParkReportDlg dialog
+// CParkReportViewerDlg dialog
 
 
 
-CParkReportDlg::CParkReportDlg(CWnd* pParent /*=nullptr*/)
-	: CDialogEx(IDD_PARKREPORT_DIALOG, pParent)
+CParkReportViewerDlg::CParkReportViewerDlg(CWnd* pParent /*=nullptr*/)
+	: CDialogEx(IDD_PARKREPORT_VIEWER_DIALOG, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
 
-void CParkReportDlg::DoDataExchange(CDataExchange* pDX)
+void CParkReportViewerDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
 }
 
-BEGIN_MESSAGE_MAP(CParkReportDlg, CDialogEx)
+BEGIN_MESSAGE_MAP(CParkReportViewerDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
 END_MESSAGE_MAP()
 
 
-// CParkReportDlg message handlers
+// CParkReportViewerDlg message handlers
 
-BOOL CParkReportDlg::OnInitDialog()
+BOOL CParkReportViewerDlg::OnInitDialog()
 {
 	CDialogEx::OnInitDialog();
 
@@ -104,7 +104,7 @@ BOOL CParkReportDlg::OnInitDialog()
 	return TRUE;  // return TRUE  unless you set the focus to a control
 }
 
-void CParkReportDlg::OnSysCommand(UINT nID, LPARAM lParam)
+void CParkReportViewerDlg::OnSysCommand(UINT nID, LPARAM lParam)
 {
 	if ((nID & 0xFFF0) == IDM_ABOUTBOX)
 	{
@@ -121,7 +121,7 @@ void CParkReportDlg::OnSysCommand(UINT nID, LPARAM lParam)
 //  to draw the icon.  For MFC applications using the document/view model,
 //  this is automatically done for you by the framework.
 
-void CParkReportDlg::OnPaint()
+void CParkReportViewerDlg::OnPaint()
 {
 	if (IsIconic())
 	{
@@ -148,7 +148,7 @@ void CParkReportDlg::OnPaint()
 
 // The system calls this function to obtain the cursor to display while the user drags
 //  the minimized window.
-HCURSOR CParkReportDlg::OnQueryDragIcon()
+HCURSOR CParkReportViewerDlg::OnQueryDragIcon()
 {
 	return static_cast<HCURSOR>(m_hIcon);
 }
