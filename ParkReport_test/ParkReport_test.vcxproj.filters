@@ -16,6 +16,9 @@
     <Filter Include="Util">
       <UniqueIdentifier>{ae9d763b-b23e-4970-b57c-8ee8bde69173}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src">
+      <UniqueIdentifier>{a674595f-1fa6-4e8a-95bc-e9d45f3e7fc0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ParkReport_test.cpp">
@@ -27,12 +30,18 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="test_evt.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ETWExportToFile.h">
       <Filter>Util</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="test_list.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
