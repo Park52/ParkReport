@@ -4,13 +4,6 @@
 bool 
 test_application_evt_export_file()
 {
-	wchar_t log_path[MAX_PATH];
-	if (0 == GetSystemDirectory(log_path, MAX_PATH))
-	{
-		std::cout << "GetSystemDirectory Failed. GetLastError:" << ::GetLastError() << std::endl;
-		return false;
-	}
-
 	std::wstring snapshot_log_path = L".\\log.evtx";
 	// Export all the events in the specified channel to the target log file.
 	if (TRUE != EvtExportLog(NULL,
@@ -43,7 +36,31 @@ test_application_evt_export_file()
 bool 
 test_system_evt_export_file()
 {
-	// System[Provider[@Name='Microsoft-Windows-FilterManager' or @Name='Service Control Manager'] and (EventID = 1 or EventID = 6 or EventID = 7045)]]
+	std::wstring snapshot_log_path = L".\\log.evtx";
+	// Export all the events in the specified channel to the target log file.
+	if (TRUE != EvtExportLog(NULL,
+							 L"System",
+							 L"*",
+							 snapshot_log_path.c_str(),
+							 EvtExportLogChannelPath))
+	{
+		wprintf(L"EvtExportLog failed for initial export with %lu.\n", GetLastError());
+		return false;
+	}
+
+	std::wstring query_log_path = L".\\system_log.evtx";
+	std::wstring query_string = L"Event/System[EventID=1 or EventID=6 or EventID=7045] and Event/System[Provider[@Name='Service Control Manager' or @Name='Microsoft-Windows-FilterManager']]";
+	if (TRUE != EvtExportLog(NULL,
+							 snapshot_log_path.c_str(),
+							 query_string.c_str(),
+							 query_log_path.c_str(),
+							 EvtExportLogFilePath))
+	{
+		wprintf(L"EvtExportLog failed for relog with %lu.\n", GetLastError());
+		return false;
+	}
+
+	DeleteFile(snapshot_log_path.c_str());
 
 	return true;
 }

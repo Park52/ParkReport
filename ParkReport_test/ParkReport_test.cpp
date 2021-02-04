@@ -8,5 +8,10 @@ int main(int argc, char* argv[])
 		std::cout << "test_application_evt_export_file failed." << std::endl;
 	}
 
+	if (true != test_system_evt_export_file())
+	{
+		std::cout << "test_system_evt_export_file failed." << std::endl;
+	}
+
 	return 0;
 }
