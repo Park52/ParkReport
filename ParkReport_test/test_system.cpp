@@ -74,7 +74,8 @@ test_get_os_version()
 		return false;
 	}
 
-	std::wcout << L"Product Name: " << product_name
+	std::wcout 
+		<< L"Product Name: " << product_name
 		<< L" Release Id: " << release_id
 		<< std::endl;
 
@@ -106,5 +107,81 @@ test_get_64bit_os()
 	{
 		std::cout << "32bit operating system" << std::endl;
 	}
+	return true;
+}
+
+bool 
+test_get_cpu_info()
+{
+	HKEY key = NULL;
+	LONG res = ERROR_SUCCESS;
+	DWORD dwType;
+	DWORD dwBytes;
+	wchar_t processor_name[MAX_PATH];
+
+	res = RegOpenKeyEx(HKEY_LOCAL_MACHINE,
+					   L"HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0",
+					   0,
+					   KEY_ALL_ACCESS,
+					   &key);
+	if (ERROR_SUCCESS != res)
+	{
+		std::cout << "RegOpenKeyEx Failed. Registry path: "
+			<< "HKLM\\HARDWARE\\DESCRIPTION\\System\\CentralProcessor\\0"
+			<< std::endl
+			<< "GetLastError :"
+			<< res
+			<< std::endl;
+		return false;
+	}
+
+	do
+	{
+		res = RegQueryValueEx(key,
+							  L"ProcessorNameString",
+							  0,
+							  &dwType,
+							  (LPBYTE)processor_name,
+							  &dwBytes);
+		if (ERROR_SUCCESS != res)
+		{
+			std::cout << "RegQueryValueEx Failed. Registry Name "
+				<< "ProcessorNameString "
+				<< "GetLastError :"
+				<< res
+				<< std::endl;
+			break;
+		}
+
+		std::wcout << "Processor Name: " << processor_name << std::endl;
+	} while (false);
+
+	if (NULL != key)
+	{
+		RegCloseKey(key);
+		key = NULL;
+	}
+
+	if (ERROR_SUCCESS != res)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+bool 
+test_get_memory_info()
+{
+	MEMORYSTATUS   Mem;
+	GlobalMemoryStatus(&Mem);
+
+	DWORD dwSize = (DWORD)Mem.dwTotalPhys / (1024 * 1024);
+	DWORD dwVirtSize = (DWORD)Mem.dwTotalVirtual / (1024 * 1024);
+
+	std::cout << "physical memory: " << dwSize << "MB" << std::endl;
+	std::cout << "physical memory: " << dwSize <<"MB" << std::endl;
+	std::cout << "virtual memory: " << dwVirtSize << "MB" << std::endl;
+
 	return true;
 }
