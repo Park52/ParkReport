@@ -173,15 +173,20 @@ test_get_cpu_info()
 bool 
 test_get_memory_info()
 {
-	MEMORYSTATUS   Mem;
-	GlobalMemoryStatus(&Mem);
+	MEMORYSTATUSEX   mem;
+	mem.dwLength = sizeof(mem);
 
-	DWORD dwSize = (DWORD)Mem.dwTotalPhys / (1024 * 1024);
-	DWORD dwVirtSize = (DWORD)Mem.dwTotalVirtual / (1024 * 1024);
+	GlobalMemoryStatusEx(&mem);
 
-	std::cout << "physical memory: " << dwSize << "MB" << std::endl;
-	std::cout << "physical memory: " << dwSize <<"MB" << std::endl;
-	std::cout << "virtual memory: " << dwVirtSize << "MB" << std::endl;
+	_tprintf(_T("There is  %ld percent of memory in use.\n"), mem.dwMemoryLoad);
+	_tprintf(_T("There are %I64d total MB of physical memory.\n"), mem.ullTotalPhys/(1024*1024));
+	_tprintf(_T("There are %I64d free  MB of physical memory.\n"), mem.ullAvailPhys/ (1024 * 1024));
+	_tprintf(_T("There are %I64d total MB of paging file.\n"), mem.ullTotalPageFile/ (1024 * 1024));
+	_tprintf(_T("There are %I64d free  MB of paging file.\n"), mem.ullAvailPageFile/ (1024 * 1024));
+	_tprintf(_T("There are %I64d total MB of virtual memory.\n"), mem.ullTotalVirtual/ (1024 * 1024));
+	_tprintf(_T("There are %I64d free  MB of virtual memory.\n"), mem.ullAvailVirtual/ (1024 * 1024));
+
+	_tprintf(_T("There are %I64d free  MB of extended memory.\n"), mem.ullAvailExtendedVirtual / (1024 * 1024));
 
 	return true;
 }

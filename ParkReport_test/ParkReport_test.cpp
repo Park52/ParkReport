@@ -32,5 +32,5 @@ int main(int argc, char* argv[])
 	{
 		std::cout << "test_get_memory_info failed." << std::endl;
 	}
-	return 0;
+ 	return 0;
 }
