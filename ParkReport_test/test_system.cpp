@@ -190,3 +190,94 @@ test_get_memory_info()
 
 	return true;
 }
+
+bool 
+test_get_interface_info()
+{
+	PIP_ADAPTER_INFO p = NULL;
+	ULONG len = 0;
+	DWORD dw = 0;
+	IP_ADDR_STRING * ns = NULL;
+	char imsi[10];
+
+	len = sizeof(IP_ADAPTER_INFO);
+	p = (IP_ADAPTER_INFO*)malloc(sizeof(IP_ADAPTER_INFO));
+
+	dw = ::GetAdaptersInfo(NULL, &len);
+
+	if (dw == ERROR_BUFFER_OVERFLOW)
+	{
+		printf("Error Buffer Overflow\n");
+
+		free(p);
+		p = (IP_ADAPTER_INFO*)malloc(len);
+	}
+
+
+	if (dw = ::GetAdaptersInfo(p, &len) == ERROR_SUCCESS)
+	{
+		while (p)
+		{
+			printf("Adapter [ %02d ]--------------------\n", p->Index);
+			printf("¢¹ Name: %s\n", p->AdapterName);
+			printf("¢¹ Description: %s\n", p->Description);
+			printf("¢¹ Type: %d\n", p->Type);
+			//	 Âü°í: https://docs.microsoft.com/en-us/windows/win32/api/iptypes/ns-iptypes-ip_adapter_info?f1url=%3FappId%3DDev15IDEF1%26l%3DEN-US%26k%3Dk(IPTYPES%252FPIP_ADAPTER_INFO);k(PIP_ADAPTER_INFO);k(DevLang-C%252B%252B);k(TargetOS-Windows)%26rd%3Dtrue
+			std::stringstream mac_addr;
+			memset(imsi, NULL, sizeof(imsi));
+			for (int i = 0; i < (int)p->AddressLength; i++)
+			{
+				if (i == p->AddressLength - 1)
+					wsprintfA(imsi, "%02X", p->Address[i]);
+				else
+					wsprintfA(imsi, "%02X-", p->Address[i]);
+				
+				mac_addr << imsi ;
+			}
+			printf("¢¹ Hardware Address: %s\n", mac_addr.str().c_str());
+
+			ns = &p->IpAddressList;
+			while (ns)
+			{
+				printf("¢¹ Ip : %s\n", ns->IpAddress.String);
+				printf("¢¹ Mask: %s\n", ns->IpMask.String);
+				ns = ns->Next;
+			}
+			printf("\n\n");
+			p = p->Next;
+		}
+	}
+	else
+	{
+		printf("Call to GetAdaptersInfo failed.\n");
+		LPVOID lpMsgBuf;
+		if (FormatMessage(
+			FORMAT_MESSAGE_ALLOCATE_BUFFER |
+			FORMAT_MESSAGE_FROM_SYSTEM |
+			FORMAT_MESSAGE_IGNORE_INSERTS,
+			NULL,
+			dw,
+			MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT), // Default language
+			(LPTSTR)&lpMsgBuf,
+			0,
+			NULL)) {
+			printf("\tError: %s", lpMsgBuf);
+		}
+		LocalFree(lpMsgBuf);
+	}
+
+	free(p);
+	return true;
+}
+
+bool 
+test_get_disk_info()
+{
+	return true;
+}
+
+bool 
+test_get_display_card_info()
+{
+	return true;
+}

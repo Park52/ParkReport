@@ -28,9 +28,14 @@ int main(int argc, char* argv[])
 	//	std::cout << "test_get_cpu_info failed." << std::endl;
 	//}
 
-	if (true != test_get_memory_info())
+	//if (true != test_get_memory_info())
+	//{
+	//	std::cout << "test_get_memory_info failed." << std::endl;
+	//}
+
+	if (true != test_get_interface_info())
 	{
-		std::cout << "test_get_memory_info failed." << std::endl;
+		std::cout << "test_get_interface_info failed." << std::endl;
 	}
  	return 0;
 }
