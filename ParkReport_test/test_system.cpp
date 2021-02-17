@@ -273,6 +273,80 @@ test_get_interface_info()
 bool 
 test_get_disk_info()
 {
+	HANDLE	hVolume = NULL;
+	DWORD	RetnVal = 0;
+	wchar_t	VolumeName[MAX_PATH + 1];
+	wchar_t	Path[MAX_PATH + 1];
+
+	// 버퍼 초기화
+	ZeroMemory(VolumeName, (MAX_PATH + 1) * sizeof(TCHAR));
+	ZeroMemory(Path, (MAX_PATH + 1) * sizeof(TCHAR));
+
+	// 볼륨 이름 찾기 시작
+	hVolume = FindFirstVolume(VolumeName, MAX_PATH);
+	if (hVolume == INVALID_HANDLE_VALUE)
+	{
+		return false;
+	}
+
+	GetVolumePathNamesForVolumeName(VolumeName, Path, MAX_PATH, &RetnVal);
+	if (_wcsicmp(Path, L"") != 0)
+	{
+		wprintf(L"%s\n", Path);
+		ULARGE_INTEGER avail_memory, total_memory, free_memory;
+
+		memset(&avail_memory, 0, sizeof(avail_memory));
+		memset(&total_memory, 0, sizeof(total_memory));
+		memset(&free_memory, 0, sizeof(free_memory));
+
+		GetDiskFreeSpaceEx(Path, &avail_memory, &total_memory, &free_memory);
+
+		//MB단위로 환산
+		LONGLONG nDiskFree = (UINT)(free_memory.QuadPart / 1024 / 1024 / 1024);
+		LONGLONG nDiskTotal = (UINT)(total_memory.QuadPart / 1024 / 1024 / 1024);
+
+		wprintf(L"Total disk size : %llu GB\n", nDiskTotal);
+		wprintf(L"Free disk size : %llu GB\n", nDiskFree);
+	}
+
+	// 버퍼 초기화
+	ZeroMemory(VolumeName, (MAX_PATH + 1) * sizeof(TCHAR));
+	ZeroMemory(Path, (MAX_PATH + 1) * sizeof(TCHAR));
+
+	// 반복
+	while (FindNextVolume(hVolume, VolumeName, MAX_PATH)) 
+	{
+		GetVolumePathNamesForVolumeName(VolumeName, Path, MAX_PATH, &RetnVal);
+		if (_wcsicmp(Path, L"") != 0)
+		{
+			wprintf(L"%s\n", Path);
+			ULARGE_INTEGER avail_memory, total_memory, free_memory;
+
+			memset(&avail_memory, 0, sizeof(avail_memory));
+			memset(&total_memory, 0, sizeof(total_memory));
+			memset(&free_memory, 0, sizeof(free_memory));
+
+			GetDiskFreeSpaceEx(Path, &avail_memory, &total_memory, &free_memory);
+
+			//MB단위로 환산
+			LONGLONG nDiskFree = (UINT)(free_memory.QuadPart / 1024 / 1024 / 1024);
+			LONGLONG nDiskTotal = (UINT)(total_memory.QuadPart / 1024 / 1024 / 1024);
+
+			wprintf(L"Total disk size : %llu GB\n", nDiskTotal);
+			wprintf(L"Free disk size : %llu GB\n", nDiskFree);
+		}
+		ZeroMemory(Path, (MAX_PATH + 1) * sizeof(TCHAR));
+		ZeroMemory(VolumeName, (MAX_PATH + 1) * sizeof(TCHAR));
+
+	}
+
+	// 볼륨 찾기 종료
+	FindVolumeClose(hVolume);
+
+	// 핸들 초기화
+	hVolume = NULL;
+	RetnVal = 0;
+
 	return true;
 }
 
