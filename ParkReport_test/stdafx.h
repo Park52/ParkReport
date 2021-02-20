@@ -16,4 +16,5 @@
 
 #include <json/json.h>
 #pragma comment(lib, "wevtapi.lib")
+#pragma comment(lib, "user32.lib")
 

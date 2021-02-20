@@ -38,10 +38,15 @@ int main(int argc, char* argv[])
 	//	std::cout << "test_get_interface_info failed." << std::endl;
 	//}
 
-	if (true != test_get_disk_info())
-	{
-		std::cout << "test_get_disk_info failed." << std::endl;
-	}
+	//if (true != test_get_disk_info())
+	//{
+	//	std::cout << "test_get_disk_info failed." << std::endl;
+	//}
+
+	//if (true != test_get_display_card_info())
+	//{
+	//	std::cout << "test_get_display_card_info failed." << std::endl;
+	//}
 
  	return 0;
 }

@@ -353,5 +353,33 @@ test_get_disk_info()
 bool 
 test_get_display_card_info()
 {
+	DISPLAY_DEVICE dd;
+	dd.cb = sizeof(dd);
+	int deviceIndex = 0;
+	if (TRUE == EnumDisplayDevices(nullptr, deviceIndex, &dd, 0))
+	{
+		std::wcout << L"Device Name: " << dd.DeviceName << std::endl;
+		std::wcout << L"Device String: " << dd.DeviceString << std::endl;
+		std::wcout << L"Device ID: " << dd.DeviceID << std::endl;
+		std::wcout << L"Device Key: " << dd.DeviceKey << std::endl;
+	}
+	//while (TRUE == EnumDisplayDevices(nullptr, deviceIndex, &dd, 0))
+	//{
+		//std::wstring devicename = dd.DeviceName;
+
+		//DISPLAY_DEVICE new_dd;
+		//new_dd.cb = sizeof(new_dd);
+		//int monitorIndex = 0;
+		//while (TRUE == EnumDisplayDevices(devicename.c_str(), monitorIndex, &new_dd, 0))
+		//{
+		//	monitorIndex++;
+		//	std::wcout << L"Device Name: " << new_dd.DeviceName << std::endl;
+		//	std::wcout << L"Device String: " << new_dd.DeviceString << std::endl;
+		//	std::wcout << L"Device ID: " << new_dd.DeviceID << std::endl;
+		//	std::wcout << L"Device Key: " << new_dd.DeviceKey << std::endl;
+		//}
+		//deviceIndex++;
+	//}
+
 	return true;
 }
