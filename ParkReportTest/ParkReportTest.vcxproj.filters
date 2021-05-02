@@ -33,6 +33,12 @@
     <ClCompile Include="File.cpp">
       <Filter>CommonLib</Filter>
     </ClCompile>
+    <ClCompile Include="Log.cpp">
+      <Filter>CommonLib</Filter>
+    </ClCompile>
+    <ClCompile Include="process.cpp">
+      <Filter>CommonLib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -45,6 +51,12 @@
       <Filter>CommonLib</Filter>
     </ClInclude>
     <ClInclude Include="File.h">
+      <Filter>CommonLib</Filter>
+    </ClInclude>
+    <ClInclude Include="Log.h">
+      <Filter>CommonLib</Filter>
+    </ClInclude>
+    <ClInclude Include="process.h">
       <Filter>CommonLib</Filter>
     </ClInclude>
   </ItemGroup>
