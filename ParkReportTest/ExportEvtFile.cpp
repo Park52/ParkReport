@@ -1,11 +1,11 @@
 #include "stdafx.h"
-#include "test_list.h"
+#include "ExportEvtFile.h"
 
-bool 
-test_application_evt_export_file()
+bool
+application_evt_export_file()
 {
 	std::wstring snapshot_log_path = L".\\log.evtx";
-	// Export all the events in the specified channel to the target log file.
+
 	if (TRUE != EvtExportLog(NULL,
 							 L"Application",
 							 L"*",
@@ -33,11 +33,11 @@ test_application_evt_export_file()
 	return true;
 }
 
-bool 
-test_system_evt_export_file()
+bool
+system_evt_export_file()
 {
 	std::wstring snapshot_log_path = L".\\log.evtx";
-	// Export all the events in the specified channel to the target log file.
+	
 	if (TRUE != EvtExportLog(NULL,
 							 L"System",
 							 L"*",

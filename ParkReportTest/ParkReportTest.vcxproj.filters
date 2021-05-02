@@ -13,36 +13,39 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Util">
-      <UniqueIdentifier>{ae9d763b-b23e-4970-b57c-8ee8bde69173}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src">
-      <UniqueIdentifier>{a674595f-1fa6-4e8a-95bc-e9d45f3e7fc0}</UniqueIdentifier>
+    <Filter Include="CommonLib">
+      <UniqueIdentifier>{34c6997b-53c2-4981-9791-c38ed8622d42}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ParkReport_test.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ETWExportToFile.cpp">
-      <Filter>Util</Filter>
-    </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test_evt.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="ExportEvtFile.cpp">
+      <Filter>CommonLib</Filter>
+    </ClCompile>
+    <ClCompile Include="CommonLib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemInfo.cpp">
+      <Filter>CommonLib</Filter>
+    </ClCompile>
+    <ClCompile Include="File.cpp">
+      <Filter>CommonLib</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ETWExportToFile.h">
-      <Filter>Util</Filter>
-    </ClInclude>
     <ClInclude Include="stdafx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="test_list.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="ExportEvtFile.h">
+      <Filter>CommonLib</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemInfo.h">
+      <Filter>CommonLib</Filter>
+    </ClInclude>
+    <ClInclude Include="File.h">
+      <Filter>CommonLib</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
