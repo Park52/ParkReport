@@ -63,4 +63,11 @@ system_evt_export_file()
 	DeleteFile(snapshot_log_path.c_str());
 
 	return true;
+		DeleteFile(snapshot_log_path.c_str());
+		DeleteFile(query_log_path.c_str());
+
+		ASSERT_TRUE(TRUE != PathFileExists(snapshot_log_path.c_str()));
+		ASSERT_TRUE(TRUE != PathFileExists(query_log_path.c_str()));
+	}
+	_mem_check_end;
 }
